@@ -8,9 +8,8 @@
 </head>
 <body>
   <!-- Unity container -->
-  <div id="unity-container">
+  <div id="unity-container" class="unity-desktop">
     <canvas id="unity-canvas"></canvas>
-    <!-- Fullscreen button -->
     <div id="unity-fullscreen-button"></div>
   </div>
 
@@ -31,6 +30,7 @@
     </div>
   </div>
 
+  <!-- Unity loader -->
   <script>
     let gameInstance;
     const canvas = document.querySelector("#unity-canvas");
@@ -46,6 +46,7 @@
       companyName: "Bulka Games LLC",
       productName: "Kinky Cats",
       productVersion: "8.2.2",
+      matchWebGLToCanvasSize: false
     };
 
     const script = document.createElement("script");
@@ -74,8 +75,12 @@
       const footer = document.querySelector(".canvas-web-footer-container");
       if (document.fullscreenElement) {
         footer.style.display = "none";
+        canvas.style.width = "100%";
+        canvas.style.height = "100%";
       } else {
         footer.style.display = "block";
+        canvas.style.width = "90%";
+        canvas.style.height = "90%";
       }
     });
   </script>

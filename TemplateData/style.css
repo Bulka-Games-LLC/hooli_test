@@ -3,27 +3,34 @@ html, body {
     padding: 0;
     height: 100%;
     background: #000;
+    font-family: Arial, sans-serif;
+    color: #ccc;
 }
 
 #unity-container {
     position: relative;
     width: 100%;
-    height: calc(100% - 60px); /* ��������� ����� ��� ����� */
+    height: calc(100% - 60px); /* ����� ��� ����� */
     display: flex;
     justify-content: center;
     align-items: center;
+    background: #000;
 }
 
 #unity-canvas {
-    width: 90%;
+    width: 90%; /* ����������� Canvas */
     height: 90%;
-    background: #222;
+    max-width: 1200px;
+    max-height: 800px;
+    background: #111;
+    cursor: default;
 }
 
+/* Fullscreen button */
 #unity-fullscreen-button {
     position: absolute;
     right: 20px;
-    bottom: 80px; /* ���� ���� ������ */
+    bottom: 80px;
     width: 32px;
     height: 32px;
     background: url("fullscreen-icon.png") no-repeat center center;
@@ -46,6 +53,7 @@ html, body {
     line-height: 1.4em;
     color: #ccc;
     margin: 5px 0 10px;
+    z-index: 40;
 }
 
 .canvas-web-footer-link {
