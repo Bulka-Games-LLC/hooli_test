@@ -1,95 +1,83 @@
 <!DOCTYPE html>
-<html lang="en-us">
-  <head>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Kinky Cats</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- Unity container -->
+  <div id="unity-container">
+    <canvas id="unity-canvas"></canvas>
+    <!-- Fullscreen button -->
+    <div id="unity-fullscreen-button"></div>
+  </div>
 
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Unity WebGL Player | Kinky Cats</title>
-    <link rel="shortcut icon" href="TemplateData/favicon.ico">
-    <link rel="stylesheet" href="TemplateData/style.css">
-  </head>
-
-  <body>
-
-<div id="unity-container">
-  <canvas id="unity-canvas"></canvas>
-  <button id="fullscreen-button">Fullscreen</button>
-</div>
-
-<footer class="site-footer" id="site-footer">
-  <div class="footer-container">
-    <div class="footer-column">
-      <h4>About</h4>
-      <ul>
-        <li><a href="#">About Us</a></li>
-        <li><a href="#">Terms of Service</a></li>
-        <li><a href="#">Privacy Policy</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-column">
-      <h4>Support</h4>
-      <ul>
-        <li><a href="#">FAQ</a></li>
-        <li><a href="#">Contact Us</a></li>
-        <li><a href="#">Help & Guides</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-column">
-      <h4>Community</h4>
-      <ul class="social-links">
-        <li><a href="#">Facebook</a></li>
-        <li><a href="#">Twitter</a></li>
-        <li><a href="#">Instagram</a></li>
-      </ul>
-    </div>
-
-    <div class="footer-column newsletter-column">
-      <h4>Subscribe</h4>
-      <form class="newsletter-form">
-        <input type="email" placeholder="Enter your email">
-        <button type="submit">Subscribe</button>
-      </form>
+  <!-- Footer -->
+  <div class="canvas-web-footer-container">
+    <div class="canvas-web-footer-text">
+      <a class="canvas-web-footer-link" href="mailto:support@yourgame.com" target="_blank" rel="noreferrer">Contact Us</a> | 
+      <a class="canvas-web-footer-link" href="/privacy_policy.html" target="_blank" rel="noreferrer">Privacy Policy</a> | 
+      <a class="canvas-web-footer-link" href="/terms_of_use.html" target="_blank" rel="noreferrer">Terms of Use</a> | 
+      <a class="canvas-web-footer-link" href="/cookie_policy.html" target="_blank" rel="noreferrer">Cookie Policy</a> | 
+      <a class="canvas-web-footer-link" href="/eula.html" target="_blank" rel="noreferrer">EULA</a> | 
+      <a class="canvas-web-footer-link" href="https://epoch.com" target="_blank" rel="noreferrer">EPOCH.COM</a>, 
+      <a class="canvas-web-footer-link" href="http://cs.segpay.com" target="_blank" rel="noreferrer">SEGPAY.COM</a> 
+      are our authorized sales agents.
+      <div class="canvas-web-footer-text">
+        This website is operated by YourCompany LTD (Address, City, Country)
+      </div>
     </div>
   </div>
 
-  <div class="footer-bottom">
-    <p>© 2025 YourCompanyName. All rights reserved.</p>
-  </div>
-</footer>
-<script>
-  let gameInstance;
-  const canvas = document.querySelector("#unity-canvas");
+  <script>
+    let gameInstance;
+    const canvas = document.querySelector("#unity-canvas");
 
-  const buildUrl = "Build";
-  const loaderUrl = buildUrl + "/Hooligapps_Web.loader.js";
+    const buildUrl = "Build";
+    const loaderUrl = buildUrl + "/Hooligapps_Web.loader.js";
 
-  const config = {
-    dataUrl: buildUrl + "/Hooligapps_Web.data.unityweb",
-    frameworkUrl: buildUrl + "/Hooligapps_Web.framework.js.unityweb",
-    codeUrl: buildUrl + "/Hooligapps_Web.wasm.unityweb",
-    streamingAssetsUrl: "StreamingAssets",
-    companyName: "Bulka Games LLC",
-    productName: "Kinky Cats",
-    productVersion: "8.2.2",
-    showBanner: function(msg, type) {
-      console.log(type + ": " + msg);
-    }
-  };
+    const config = {
+      dataUrl: buildUrl + "/Hooligapps_Web.data.unityweb",
+      frameworkUrl: buildUrl + "/Hooligapps_Web.framework.js.unityweb",
+      codeUrl: buildUrl + "/Hooligapps_Web.wasm.unityweb",
+      streamingAssetsUrl: "StreamingAssets",
+      companyName: "Bulka Games LLC",
+      productName: "Kinky Cats",
+      productVersion: "8.2.2",
+    };
 
-  const script = document.createElement("script");
-  script.src = loaderUrl;
-  script.onload = () => {
-    createUnityInstance(canvas, config)
-      .then((unityInstance) => {
-        gameInstance = unityInstance;
-      })
-      .catch((message) => {
-        alert(message);
-      });
-  };
-  document.body.appendChild(script);
-</script>
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config)
+        .then((unityInstance) => {
+          gameInstance = unityInstance;
+        })
+        .catch((message) => {
+          alert(message);
+        });
+    };
+    document.body.appendChild(script);
+
+    // Fullscreen button logic
+    const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+    fullscreenButton.addEventListener("click", () => {
+      if (gameInstance) {
+        gameInstance.SetFullscreen(1);
+      }
+    });
+
+    // Hide footer in fullscreen
+    document.addEventListener("fullscreenchange", () => {
+      const footer = document.querySelector(".canvas-web-footer-container");
+      if (document.fullscreenElement) {
+        footer.style.display = "none";
+      } else {
+        footer.style.display = "block";
+      }
+    });
+  </script>
 </body>
 </html>
