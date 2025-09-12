@@ -10,7 +10,7 @@ html, body {
 #unity-container {
     position: relative;
     width: 100%;
-    height: calc(100% - 60px); /* ����� ��� ����� */
+    height: calc(100% - 70px); /* ����� ��� ����� */
     display: flex;
     justify-content: center;
     align-items: flex-start; /* ������� � ����� */
@@ -22,7 +22,7 @@ html, body {
     display: inline-block;
     width: 95%;
     max-width: 2560px; /* ����������� ��� 2K/4K */
-    aspect-ratio: 1900 / 856;
+    aspect-ratio: 1.9;
     background: #111;
 }
 
@@ -36,7 +36,7 @@ html, body {
 #unity-fullscreen-button {
     position: absolute;
     right: -52px; /* 20px �� ��������� ������� */
-    bottom: 20px;
+    bottom: 0px;
     width: 32px;
     height: 32px;
     background: url("fullscreen-icon.png") no-repeat center center;
