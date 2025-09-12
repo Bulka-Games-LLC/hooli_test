@@ -13,57 +13,58 @@ html, body {
     height: calc(100% - 60px); /* ����� ��� ����� */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start; /* ������� � ����� */
     background: #000;
 }
 
-#unity-canvas {
-    width: 90%; /* ����������� Canvas */
-    height: 90%;
-    max-width: 1200px;
-    max-height: 800px;
+.unity-wrapper {
+    position: relative;
+    display: inline-block;
+    width: 95%;
+    max-width: 2560px; /* ����������� ��� 2K/4K */
+    aspect-ratio: 1900 / 856;
     background: #111;
+}
+
+#unity-canvas {
+    width: 100%;
+    height: 100%;
+    display: block;
     cursor: default;
 }
 
-/* Fullscreen button */
 #unity-fullscreen-button {
     position: absolute;
+    right: -52px; /* 20px �� ��������� ������� */
     bottom: 20px;
-    /* ������: 50% (�����) + 45% (�������� �������) = ������ ������� ������� */
-    left: calc(95% + 20px);
     width: 32px;
     height: 32px;
     background: url("fullscreen-icon.png") no-repeat center center;
     background-size: contain;
     cursor: pointer;
+    z-index: 50;
 }
 
-    #unity-fullscreen-button:hover {
-        opacity: 0.8;
-    }
-
-/* Footer */
 .canvas-web-footer-container {
-    position: absolute;
-    bottom: 0;
     width: 100%;
     text-align: center;
-    font-size: 12px;
+    font-size: 11px;
     line-height: 1.4em;
-    color: #ccc;
-    margin: 5px 0 10px;
-    z-index: 40;
+    color: #b3b3b3;
+    position: absolute;
+    bottom: 0;
+    padding: 5px 0 10px 0;
+    background: transparent;
 }
 
 .canvas-web-footer-link {
-    color: #ccc;
+    color: #b3b3b3;
     text-decoration: underline;
     margin: 0 3px;
 }
 
     .canvas-web-footer-link:hover {
-        color: #fff;
+        color: #ffffff;
     }
 
 .canvas-web-footer-text {
