@@ -10,10 +10,10 @@ html, body {
 #unity-container {
     position: relative;
     width: 100%;
-    height: calc(100% - 70px); /* ����� ��� ����� */
+    height: calc(100% - 70px); /* место под футер */
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* ������� � ����� */
+    align-items: flex-start; /* прижать к верху */
     background: #000;
 }
 
@@ -21,8 +21,9 @@ html, body {
     position: relative;
     display: inline-block;
     width: 95%;
-    max-width: 2560px; /* ����������� ��� 2K/4K */
+    max-width: 2560px;
     aspect-ratio: 1.9;
+    max-height: 100%; /* чтобы не вылезало из контейнера */
     background: #111;
 }
 
@@ -35,7 +36,7 @@ html, body {
 
 #unity-fullscreen-button {
     position: absolute;
-    right: -52px; /* 20px �� ��������� ������� */
+    right: -52px; /* 20px за пределами канваса */
     bottom: 0px;
     width: 32px;
     height: 32px;
