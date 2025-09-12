@@ -4,24 +4,27 @@ html, body {
     height: 100%;
     background: #000;
     font-family: Arial, sans-serif;
+    background: url("background.jpg") center center no-repeat;
+    background-size: cover;
+    background-color: #000;
     color: #ccc;
 }
 
 #unity-container {
     position: relative;
     width: 100%;
-    height: calc(100% - 70px); /* место под футер */
+    height: calc(100% - 80px); /* место под футер */
     display: flex;
     justify-content: center;
     align-items: flex-start; /* прижать к верху */
-    background: #000;
+    background: transparent;
 }
 
 .unity-wrapper {
     position: relative;
     display: inline-block;
     width: 95%;
-    max-width: 2560px;
+    max-width: 2360px;
     aspect-ratio: 1.9;
     max-height: 100%; /* чтобы не вылезало из контейнера */
     background: #111;
@@ -47,15 +50,11 @@ html, body {
 }
 
 .canvas-web-footer-container {
-    width: 100%;
-    text-align: center;
-    font-size: 11px;
-    line-height: 1.4em;
-    color: #b3b3b3;
     position: absolute;
-    bottom: 0;
-    padding: 5px 0 10px 0;
-    background: transparent;
+    bottom: 0px;
+    width: 100%;
+    margin-top: 5px;
+    margin-bottom: 10px;
 }
 
 .canvas-web-footer-link {
@@ -69,5 +68,10 @@ html, body {
     }
 
 .canvas-web-footer-text {
-    margin-top: 5px;
+    color: #fff;
+    margin: 0 auto;
+    text-align: center;
+    padding-bottom: 2px;
+    font-size: 14px;
+    line-height: 14px;
 }
