@@ -23,11 +23,13 @@ html, body {
 .unity-wrapper {
     position: relative;
     display: inline-block;
-    width: 95%;
-    max-width: 2360px;
+    width: 80%;
+    max-width: 2048px;
     aspect-ratio: 1.9;
     max-height: 100%; /* чтобы не вылезало из контейнера */
+    height: auto;
     background: #111;
+    margin-bottom: 10px;
 }
 
 #unity-canvas {
