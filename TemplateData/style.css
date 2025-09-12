@@ -13,10 +13,10 @@ html, body {
 #unity-container {
     position: relative;
     width: 100%;
-    height: calc(100% - 80px); /* место под футер */
+    height: calc(100% - 80px); /* ����� ��� ����� */
     display: flex;
     justify-content: center;
-    align-items: flex-start; /* прижать к верху */
+    align-items: flex-start; /* ������� � ����� */
     background: transparent;
 }
 
@@ -26,7 +26,7 @@ html, body {
     width: 80%;
     max-width: 2048px;
     aspect-ratio: 1.9;
-    max-height: 100%; /* чтобы не вылезало из контейнера */
+    max-height: 100%; /* ����� �� �������� �� ���������� */
     height: auto;
     background: #111;
     margin-bottom: 10px;
@@ -41,7 +41,7 @@ html, body {
 
 #unity-fullscreen-button {
     position: absolute;
-    right: -52px; /* 20px за пределами канваса */
+    right: -52px; /* 20px �� ��������� ������� */
     bottom: 0px;
     width: 32px;
     height: 32px;
@@ -65,9 +65,9 @@ html, body {
     margin: 0 3px;
 }
 
-    .canvas-web-footer-link:hover {
-        color: #ffffff;
-    }
+.canvas-web-footer-link:hover {
+    color: #ffffff;
+}
 
 .canvas-web-footer-text {
     color: #fff;
