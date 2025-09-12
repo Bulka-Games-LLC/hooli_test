@@ -29,14 +29,14 @@ html, body {
 /* Fullscreen button */
 #unity-fullscreen-button {
     position: absolute;
-    right: 20px;
-    bottom: 80px;
+    bottom: 20px;
+    /* ������: 50% (�����) + 45% (�������� �������) = ������ ������� ������� */
+    left: calc(95% + 20px);
     width: 32px;
     height: 32px;
     background: url("fullscreen-icon.png") no-repeat center center;
     background-size: contain;
     cursor: pointer;
-    z-index: 50;
 }
 
     #unity-fullscreen-button:hover {
