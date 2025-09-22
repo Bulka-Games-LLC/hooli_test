@@ -19,7 +19,6 @@
   </div>
 
   <script>
-    // Локализации
     const translations = {
       ru: {
         heading: "ПОДТВЕРЖДЕНИЕ ВОЗРАСТА",
@@ -41,33 +40,29 @@
       }
     };
 
-    // Выбор языка
     const lang = (navigator.language || "en").substring(0,2);
     const t = translations[lang] || translations["en"];
 
-    // Применение
     document.getElementById("age-heading").textContent = t.heading;
     document.getElementById("age-text").textContent = t.text;
     document.getElementById("btn-yes").innerHTML = t.yes.replace("\n", "<br><small>");
     document.getElementById("btn-no").textContent = t.no;
 
-    // Проверка сохранённого выбора
     const stored = localStorage.getItem("ageConfirmed");
     if (stored === "yes") {
       window.location.href = "index.html";
-    } else if (stored === "no") {
-      window.close();
-    }
+    } 
+    else {
+	document.getElementById("btn-yes").addEventListener("click", () => {
+      	localStorage.setItem("ageConfirmed", "yes");
+      	window.location.href = "unity.html";
+    	});
 
-    // Кнопки
-    document.getElementById("btn-yes").addEventListener("click", () => {
-      localStorage.setItem("ageConfirmed", "yes");
-      window.location.href = "unity.html";
-    });
-    document.getElementById("btn-no").addEventListener("click", () => {
-      localStorage.setItem("ageConfirmed", "no");
-      window.close();
-    });
+        document.getElementById("btn-no").addEventListener("click", () => {      
+        window.location.href = "https://www.google.com";
+        });
+    }
+    
   </script>
 </body>
 </html>
