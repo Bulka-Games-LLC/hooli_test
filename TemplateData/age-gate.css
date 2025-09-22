@@ -3,7 +3,7 @@ html, body { height: 100%; font-family: Arial, sans-serif; }
 
 /* Фон */
 body {
-  background: url("bg.jpg") no-repeat center center;
+  background: url("age-bg.png") no-repeat center center;
   background-size: cover;
   display: flex;
   align-items: center;
