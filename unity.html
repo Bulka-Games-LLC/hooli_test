@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unity WebGL Game</title>
+  <link rel="stylesheet" href="TemplateData/style.css">
+</head>
+<body>
+  <div id="unity-container">
+    <div class="unity-wrapper">
+      <canvas id="unity-canvas"></canvas>
+      <div id="unity-fullscreen-button"></div>
+    </div>
+  </div>
+  <div class="canvas-web-footer-container">
+    <div class="canvas-web-footer-text">
+      <a class="canvas-web-footer-link" href="mailto:lustgoddess@cwgame.zendesk.com" target="_blank" rel="noreferrer">Contact Us</a> |
+      <a class="canvas-web-footer-link" href="mailto:lustgoddess@cwgame.zendesk.com" target="_blank" rel="noreferrer">Customer Service</a> |
+      <a class="canvas-web-footer-link" href="/privacy_policy.html" target="_blank" rel="noreferrer">Privacy Policy</a> |
+      <a class="canvas-web-footer-link" href="/terms_of_use.html" target="_blank" rel="noreferrer">Terms of Use</a> |
+      <a class="canvas-web-footer-link" href="/2257.html" target="_blank" rel="noreferrer">2257 Exempt</a> |
+      <a class="canvas-web-footer-link" href="https://www.hooligapps.com/contact-us?game=Lust%20Goddess&amp;report=1" target="_blank" rel="noreferrer">Report Content</a> |
+      <a class="canvas-web-footer-link" href="/cookie_policy.html" target="_blank" rel="noreferrer">Cookie Policy</a> |
+      <a class="canvas-web-footer-link" href="/eula.html" target="_blank" rel="noreferrer">EULA</a>
+      <div class="canvas-web-footer-text">
+        This website is operated by Flushee LTD (Irodi Attikou, 8A, Lakatamia, 2332, Nicosia, Cyprus)
+      </div>
+      <a class="canvas-web-footer-link" href="https://epoch.com" target="_blank" rel="noreferrer">EPOCH.COM</a>,
+      <a class="canvas-web-footer-link" href="http://cs.segpay.com" target="_blank" rel="noreferrer">SEGPAY.COM</a>
+      are our authorized sales agents for access to lust-goddess.com.
+    </div>
+  </div>
+
+  <script type="module">
+  import { checkAge } from "./TemplateData/age-gate.js";
+
+  let gameInstance;
+  const canvas = document.querySelector("#unity-canvas");
+
+  const buildUrl = "Build";
+  const loaderUrl = buildUrl + "/Hooligapps_Web.loader.js";
+
+  const config = {
+    dataUrl: buildUrl + "/Hooligapps_Web.data.unityweb",
+    frameworkUrl: buildUrl + "/Hooligapps_Web.framework.js.unityweb",
+    codeUrl: buildUrl + "/Hooligapps_Web.wasm.unityweb",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "Bulka Games LLC",
+    productName: "Kinky Cats",
+    productVersion: "8.2.4",
+    matchWebGLToCanvasSize: true
+  };
+
+  // Сначала проверяем возраст
+  checkAge().then((ok) => {
+    if (!ok) {
+      console.warn("[AgeGate] Access denied");
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:50px;'>Access denied</h2>";
+      return;
+    }
+
+    console.log("[AgeGate] Passed, loading Unity...");
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+      createUnityInstance(canvas, config)
+        .then((unityInstance) => { gameInstance = unityInstance; })
+        .catch((message) => { alert(message); });
+    };
+    document.body.appendChild(script);
+
+    document.querySelector("#unity-fullscreen-button").addEventListener("click", () => {
+      if (gameInstance) gameInstance.SetFullscreen(1);
+    });
+
+    // Hide footer on fullscreen
+    document.addEventListener("fullscreenchange", () => {
+      const footer = document.querySelector(".canvas-web-footer-container");
+      footer.style.display = document.fullscreenElement ? "none" : "block";
+    });
+  });
+</script>
+</body>
+</html>
