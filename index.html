@@ -7,15 +7,12 @@
   <link rel="stylesheet" href="TemplateData/style.css">
 </head>
 <body>
-  <!-- Контейнер для игры -->
   <div id="unity-container">
     <div class="unity-wrapper">
       <canvas id="unity-canvas"></canvas>
       <div id="unity-fullscreen-button"></div>
     </div>
   </div>
-
-  <!-- Футер -->
   <div class="canvas-web-footer-container">
     <div class="canvas-web-footer-text">
       <a class="canvas-web-footer-link" href="mailto:lustgoddess@cwgame.zendesk.com" target="_blank" rel="noreferrer">Contact Us</a> |
@@ -35,24 +32,35 @@
     </div>
   </div>
 
-  <!-- Скрипт Unity -->
-  <script>
-    let gameInstance;
-    const canvas = document.querySelector("#unity-canvas");
+  <script type="module">
+  import { checkAge } from ".TemplateData/age-gate.js";
 
-    const buildUrl = "Build";
-    const loaderUrl = buildUrl + "/Hooligapps_Web.loader.js";
+  let gameInstance;
+  const canvas = document.querySelector("#unity-canvas");
 
-    const config = {
-      dataUrl: buildUrl + "/Hooligapps_Web.data.unityweb",
-      frameworkUrl: buildUrl + "/Hooligapps_Web.framework.js.unityweb",
-      codeUrl: buildUrl + "/Hooligapps_Web.wasm.unityweb",
-      streamingAssetsUrl: "StreamingAssets",
-      companyName: "Bulka Games LLC",
-      productName: "Kinky Cats",
-      productVersion: "8.2.4",
-      matchWebGLToCanvasSize: true
-    };
+  const buildUrl = "Build";
+  const loaderUrl = buildUrl + "/Hooligapps_Web.loader.js";
+
+  const config = {
+    dataUrl: buildUrl + "/Hooligapps_Web.data.unityweb",
+    frameworkUrl: buildUrl + "/Hooligapps_Web.framework.js.unityweb",
+    codeUrl: buildUrl + "/Hooligapps_Web.wasm.unityweb",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "Bulka Games LLC",
+    productName: "Kinky Cats",
+    productVersion: "8.2.4",
+    matchWebGLToCanvasSize: true
+  };
+
+  // Сначала проверяем возраст
+  checkAge().then((ok) => {
+    if (!ok) {
+      console.warn("[AgeGate] Access denied");
+      document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:50px;'>Access denied</h2>";
+      return;
+    }
+
+    console.log("[AgeGate] Passed, loading Unity...");
 
     const script = document.createElement("script");
     script.src = loaderUrl;
@@ -63,9 +71,8 @@
     };
     document.body.appendChild(script);
 
-    // Fullscreen button behaviour
     document.querySelector("#unity-fullscreen-button").addEventListener("click", () => {
-      if(gameInstance) gameInstance.SetFullscreen(1);
+      if (gameInstance) gameInstance.SetFullscreen(1);
     });
 
     // Hide footer on fullscreen
@@ -73,6 +80,7 @@
       const footer = document.querySelector(".canvas-web-footer-container");
       footer.style.display = document.fullscreenElement ? "none" : "block";
     });
-  </script>
+  });
+</script>
 </body>
 </html>
