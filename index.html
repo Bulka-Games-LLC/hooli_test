@@ -50,9 +50,8 @@
 
     const stored = localStorage.getItem("ageConfirmed");
     if (stored === "yes") {
-      window.location.href = "index.html";
-    } 
-    else {
+      window.location.href = "unity.html";
+    } else {
 	document.getElementById("btn-yes").addEventListener("click", () => {
       	localStorage.setItem("ageConfirmed", "yes");
       	window.location.href = "unity.html";
