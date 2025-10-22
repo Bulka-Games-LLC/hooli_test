@@ -32,9 +32,7 @@
     </div>
   </div>
 
-  <script type="module">
-  import { checkAge } from "./TemplateData/age-gate.js";
-
+  <script type="module">  
   let gameInstance;
   const canvas = document.querySelector("#unity-canvas");
 
@@ -52,16 +50,6 @@
     matchWebGLToCanvasSize: true
   };
 
-  // Сначала проверяем возраст
-  checkAge().then((ok) => {
-    if (!ok) {
-      console.warn("[AgeGate] Access denied");
-      document.body.innerHTML = "<h2 style='color:white;text-align:center;margin-top:50px;'>Access denied</h2>";
-      return;
-    }
-
-    console.log("[AgeGate] Passed, loading Unity...");
-
     const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
@@ -75,7 +63,6 @@
       if (gameInstance) gameInstance.SetFullscreen(1);
     });
 
-    // Hide footer on fullscreen
     document.addEventListener("fullscreenchange", () => {
       const footer = document.querySelector(".canvas-web-footer-container");
       footer.style.display = document.fullscreenElement ? "none" : "block";
