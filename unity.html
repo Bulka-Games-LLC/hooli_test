@@ -3,14 +3,26 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Unity WebGL Game</title>
+  <title>Pussy Island</title>
   <link rel="stylesheet" href="TemplateData/style.css">
 </head>
 <body>
   <div id="unity-container">
     <div class="unity-wrapper">
       <canvas id="unity-canvas"></canvas>
-      <div id="unity-fullscreen-button"></div>
+      <div id="unity-loading" role="status" aria-live="polite">
+        <div class="loading-title">PUSSY ISLAND</div>
+        <div class="loading-progress">
+          <div class="loading-labels">
+            <span id="loading-status">Loading</span>
+            <span id="loading-percent">0%</span>
+          </div>
+          <div id="loading-progressbar" class="loading-track" role="progressbar" aria-label="Game loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="loading-fill" class="loading-fill"></div>
+          </div>
+        </div>
+      </div>
+      <button id="unity-fullscreen-button" type="button" aria-label="Fullscreen" hidden></button>
     </div>
   </div>
   <div class="canvas-web-footer-container">
@@ -43,6 +55,18 @@
   <script>  
   let gameInstance;
   const canvas = document.querySelector("#unity-canvas");
+  const loading = document.querySelector("#unity-loading");
+  const loadingStatus = document.querySelector("#loading-status");
+  const loadingPercent = document.querySelector("#loading-percent");
+  const loadingProgressbar = document.querySelector("#loading-progressbar");
+  const loadingFill = document.querySelector("#loading-fill");
+  const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+
+  function showLoadingError(message) {
+    loadingStatus.textContent = "Loading failed. Please refresh the page.";
+    loadingPercent.textContent = "";
+    console.error(message);
+  }
 
   const buildUrl = "Build";
   const loaderUrl = buildUrl + "/web_pi.loader.js";
@@ -61,13 +85,24 @@
     const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
-      createUnityInstance(canvas, config)
-        .then((unityInstance) => { gameInstance = unityInstance; })
-        .catch((message) => { alert(message); });
+      createUnityInstance(canvas, config, (progress) => {
+        const percent = Math.round(Math.max(0, Math.min(1, progress)) * 100);
+        loadingFill.style.width = percent + "%";
+        loadingPercent.textContent = percent + "%";
+        loadingProgressbar.setAttribute("aria-valuenow", percent);
+      })
+        .then((unityInstance) => {
+          gameInstance = unityInstance;
+          loading.classList.add("is-hidden");
+          loading.addEventListener("transitionend", () => loading.remove(), { once: true });
+          fullscreenButton.hidden = false;
+        })
+        .catch(showLoadingError);
     };
+    script.onerror = () => showLoadingError("Unity loader script could not be loaded.");
     document.body.appendChild(script);
 
-    document.querySelector("#unity-fullscreen-button").addEventListener("click", () => {
+    fullscreenButton.addEventListener("click", () => {
       if (gameInstance) gameInstance.SetFullscreen(1);
     });
 
