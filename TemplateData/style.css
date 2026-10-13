@@ -53,20 +53,6 @@ body {
     pointer-events: none;
 }
 
-.loading-title {
-    position: absolute;
-    top: 5%;
-    left: 5%;
-    width: max-content;
-    max-width: 90%;
-    color: #fff;
-    font-size: clamp(20px, 3vw, 48px);
-    font-weight: 900;
-    letter-spacing: .08em;
-    text-align: left;
-    text-shadow: 0 3px 0 #652261, 0 7px 18px #150518, 0 0 28px #e55acf;
-}
-
 .loading-progress {
     position: absolute;
     right: 0;
