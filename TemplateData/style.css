@@ -1,0 +1,133 @@
+* { box-sizing: border-box; }
+
+html, body {
+    margin: 0;
+    min-height: 100%;
+    background: #100617;
+    color: #fff;
+    font-family: Arial, sans-serif;
+}
+
+body {
+    min-height: 100vh;
+    background: url("bg_web.png") center / cover no-repeat;
+}
+
+#unity-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+}
+
+.unity-wrapper {
+    position: relative;
+    width: 90%;
+    /* 16:9 frame, no taller than the viewport minus 100px. */
+    max-width: calc(177.7778vh - 177.7778px);
+    aspect-ratio: 16 / 9;
+    background: #110918;
+    box-shadow: 0 0 50px 20px #000;
+}
+
+#unity-canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+    cursor: default;
+}
+
+#unity-loading {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    overflow: hidden;
+    background: linear-gradient(0deg, rgba(0, 0, 0, .45), transparent 14%),
+                url("frame_web.png") center / cover no-repeat;
+    opacity: 1;
+    transition: opacity .45s ease;
+}
+
+#unity-loading.is-hidden {
+    opacity: 0;
+    pointer-events: none;
+}
+
+.loading-progress {
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 0 0 2px;
+    text-shadow: 0 2px 6px #000;
+}
+
+.loading-labels {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 18px 10px;
+    font-size: clamp(13px, 1.3vw, 18px);
+    font-weight: 700;
+}
+
+.loading-track {
+    height: clamp(8px, 1.3vh, 14px);
+    overflow: hidden;
+    background: rgba(22, 8, 27, .9);
+    border: 1px solid rgba(255, 184, 241, .55);
+    box-shadow: 0 0 12px rgba(0, 0, 0, .8), inset 0 1px 4px #08030b;
+}
+
+.loading-fill {
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, #b735a7, #fa81de 75%, #ffe6f8);
+    box-shadow: 0 0 14px #f57cda;
+    transition: width .2s ease;
+}
+
+#unity-fullscreen-button {
+    position: absolute;
+    right: -44px;
+    bottom: 0;
+    width: 32px;
+    height: 32px;
+    padding: 0;
+    border: 0;
+    background: url("fullscreen-icon.png") center / contain no-repeat;
+    cursor: pointer;
+}
+
+#unity-fullscreen-button[hidden] { display: none; }
+
+.canvas-web-footer-container {
+    width: 100%;
+    padding: 0 16px 18px;
+}
+
+.canvas-web-footer-link {
+    color: #fff;
+    margin: 0 3px;
+}
+
+.canvas-web-footer-link:hover,
+.canvas-web-footer-link:focus-visible { color: #d5c4d7; }
+
+.canvas-web-footer-text {
+    max-width: 1100px;
+    margin: 0 auto;
+    color: #fff;
+    text-align: center;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+@media (max-width: 700px) {
+    #unity-fullscreen-button {
+        right: 10px;
+        bottom: 10px;
+    }
+
+    .loading-labels { margin: 0 10px 7px; }
+    .canvas-web-footer-text { font-size: 12px; }
+}

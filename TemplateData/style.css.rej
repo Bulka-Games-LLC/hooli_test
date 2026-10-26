@@ -1,0 +1,10 @@
+diff a/Assets/WebGLTemplates/Hooligaps/TemplateData/style.css b/Assets/WebGLTemplates/Hooligaps/TemplateData/style.css	(rejected hunks)
+@@ -10,7 +10,7 @@
+ #unity-container {
+     position: relative;
+     width: 100%;
+-    height: calc(100% - 60px); /* ����� ��� ����� */
++    height: calc(100% - 70px); /* ����� ��� ����� */
+     display: flex;
+     justify-content: center;
+     align-items: flex-start; /* ������� � ����� */

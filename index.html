@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pussy Island</title>
+  <link rel="stylesheet" href="TemplateData/style.css">
+</head>
+<body>
+  <div id="unity-container">
+    <div class="unity-wrapper">
+      <canvas id="unity-canvas"></canvas>
+      <div id="unity-loading" role="status" aria-live="polite">
+        <div class="loading-progress">
+          <div class="loading-labels">
+            <span id="loading-status">Loading</span>
+            <span id="loading-percent">0%</span>
+          </div>
+          <div id="loading-progressbar" class="loading-track" role="progressbar" aria-label="Game loading" aria-valuemin="0" aria-valuemax="100" aria-valuenow="0">
+            <div id="loading-fill" class="loading-fill"></div>
+          </div>
+        </div>
+      </div>
+      <button id="unity-fullscreen-button" type="button" aria-label="Fullscreen" hidden></button>
+    </div>
+  </div>
+  <div class="canvas-web-footer-container">
+    <div class="canvas-web-footer-text">
+	<a class="canvas-web-footer-link" href="https://www.hooligapps.com/contact-us?game=Nudus&amp;report=1" target="_blank" rel="noreferrer">Contact us</a> |
+
+      	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/10AVjkU1Ozw-4peX0GzjBSkujWKr8W7F8/edit?usp=sharing&ouid=114975435890089451958&rtpof=true&sd=true" target="_blank" rel="noreferrer">Customer Service</a> |
+
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1a801dkCg1GrcGcXOBvXcLQH2l9dzwez9PO36q0SrypU/edit?usp=sharing" target="_blank" rel="noreferrer">Privacy Policy</a> |
+
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/10AVjkU1Ozw-4peX0GzjBSkujWKr8W7F8/edit?usp=sharing&ouid=114975435890089451958&rtpof=true&sd=true">Terms of Use</a> |
+
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1cmYDTM4ZW_iRqg6owmckbDVIh2thADaDZyGy_n6EQhY/edit?usp=sharing"_blank" rel="noreferrer">2257 Exempt</a>
+
+	<a class="canvas-web-footer-link" href="https://www.hooligapps.com/contact-us?game=Nudus&report=1" target="_blank" rel="noreferrer">Report Content</a> |
+
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1OKYFH_XZUcWTjeucU9j3UXtlE1tbyP9OIF5pXOUp5wo/edit?usp=sharing"_blank" rel="noreferrer">Cookies Policy</a> |
+
+      	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1xamUq7dfrJHR39pdH0GEWPP1msd4TuIdAG2PTF_YGGg/edit?usp=sharing" target="_blank" rel="noreferrer">EULA</a> |
+        
+      <div class="canvas-web-footer-text">
+        This website is operated by Flushee LTD (Irodi Attikou, 8A, Lakatamia, 2332, Nicosia, Cyprus)
+      </div>
+      <a class="canvas-web-footer-link" href="https://epoch.com" target="_blank" rel="noreferrer">EPOCH.COM</a>,
+      <a class="canvas-web-footer-link" href="https://www.hooligapps.com" target="_blank" rel="noreferrer">HOOLIGAPPS.COM</a>
+      are our authorized sales agents for access to pussy-island.com.
+    </div>
+  </div>
+
+<script src="https://cdn.hooli.games/sdk/1.2.0/hooligapps.js"></script>
+
+
+  <script>  
+  let gameInstance;
+  const canvas = document.querySelector("#unity-canvas");
+  const loading = document.querySelector("#unity-loading");
+  const loadingStatus = document.querySelector("#loading-status");
+  const loadingPercent = document.querySelector("#loading-percent");
+  const loadingProgressbar = document.querySelector("#loading-progressbar");
+  const loadingFill = document.querySelector("#loading-fill");
+  const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+
+  function showLoadingError(message) {
+    loadingStatus.textContent = "Loading failed. Please refresh the page.";
+    loadingPercent.textContent = "";
+    console.error(message);
+  }
+
+  const buildUrl = "Build";
+  const loaderUrl = buildUrl + "/web_pi.loader.js";
+
+  const config = {
+    dataUrl: buildUrl + "/web_pi.data.unityweb",
+    frameworkUrl: buildUrl + "/web_pi.framework.js.unityweb",
+    codeUrl: buildUrl + "/web_pi.wasm.unityweb",
+    streamingAssetsUrl: "StreamingAssets",
+    companyName: "Bulkagames",
+    productName: "PussyIsland",
+    productVersion: "3.9.2",
+    matchWebGLToCanvasSize: true
+};
+
+    const script = document.createElement("script");
+    script.src = loaderUrl;
+    script.onload = () => {
+	var portal = location.pathname.indexOf('/portal') === 0;   // or any rule that tells the portal page apart
+  HApps.init({
+    platformOrigin: 'https://portal.igra.rocks',             // https://hooli.games in production
+    ssoLoginUrl: 'https://webhooks-hoolipay-lb-1.prd.balancy.dev/v2/hoolipay/portal/0ec15e10-88c4-11f0-bf25-1fec53a055ba/0/sign',
+    isPortal: portal
+  });
+      createUnityInstance(canvas, config, (progress) => {
+        const percent = Math.round(Math.max(0, Math.min(1, progress)) * 100);
+        loadingFill.style.width = percent + "%";
+        loadingPercent.textContent = percent + "%";
+        loadingProgressbar.setAttribute("aria-valuenow", percent);
+      })
+        .then((unityInstance) => {
+          gameInstance = unityInstance;
+          loading.classList.add("is-hidden");
+          loading.addEventListener("transitionend", () => loading.remove(), { once: true });
+          fullscreenButton.hidden = false;
+		  function (unityInstance) {
+    HApps.unity.attach({ gameInstance: unityInstance, objectName: 'HAppsJSBridge', methodName: 'OnMessage' });
+  };
+        })
+        .catch(showLoadingError);
+    };
+    script.onerror = () => showLoadingError("Unity loader script could not be loaded.");
+    document.body.appendChild(script);
+
+    fullscreenButton.addEventListener("click", () => {
+      if (gameInstance) gameInstance.SetFullscreen(1);
+    });
+
+    document.addEventListener("fullscreenchange", () => {
+      const footer = document.querySelector(".canvas-web-footer-container");
+      footer.style.display = document.fullscreenElement ? "none" : "block";
+    });
+</script>
+</body>
+</html>
