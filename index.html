@@ -28,17 +28,17 @@
     <div class="canvas-web-footer-text">
 	<a class="canvas-web-footer-link" href="https://www.hooligapps.com/contact-us?game=Nudus&amp;report=1" target="_blank" rel="noreferrer">Contact us</a> |
 
-      	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/10AVjkU1Ozw-4peX0GzjBSkujWKr8W7F8/edit?usp=sharing&ouid=114975435890089451958&rtpof=true&sd=true" target="_blank" rel="noreferrer">Customer Service</a> |
+      	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/10AVjkU1Ozw-4peX0GzjBSkujWKr8W7F8/edit?usp=sharing&amp;ouid=114975435890089451958&amp;rtpof=true&amp;sd=true" target="_blank" rel="noreferrer">Customer Service</a> |
 
 	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1a801dkCg1GrcGcXOBvXcLQH2l9dzwez9PO36q0SrypU/edit?usp=sharing" target="_blank" rel="noreferrer">Privacy Policy</a> |
 
-	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/10AVjkU1Ozw-4peX0GzjBSkujWKr8W7F8/edit?usp=sharing&ouid=114975435890089451958&rtpof=true&sd=true">Terms of Use</a> |
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/10AVjkU1Ozw-4peX0GzjBSkujWKr8W7F8/edit?usp=sharing&amp;ouid=114975435890089451958&amp;rtpof=true&amp;sd=true">Terms of Use</a> |
 
-	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1cmYDTM4ZW_iRqg6owmckbDVIh2thADaDZyGy_n6EQhY/edit?usp=sharing"_blank" rel="noreferrer">2257 Exempt</a>
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1cmYDTM4ZW_iRqg6owmckbDVIh2thADaDZyGy_n6EQhY/edit?usp=sharing" target="_blank" rel="noreferrer">2257 Exempt</a>
 
-	<a class="canvas-web-footer-link" href="https://www.hooligapps.com/contact-us?game=Nudus&report=1" target="_blank" rel="noreferrer">Report Content</a> |
+	<a class="canvas-web-footer-link" href="https://www.hooligapps.com/contact-us?game=Nudus&amp;report=1" target="_blank" rel="noreferrer">Report Content</a> |
 
-	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1OKYFH_XZUcWTjeucU9j3UXtlE1tbyP9OIF5pXOUp5wo/edit?usp=sharing"_blank" rel="noreferrer">Cookies Policy</a> |
+	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1OKYFH_XZUcWTjeucU9j3UXtlE1tbyP9OIF5pXOUp5wo/edit?usp=sharing" target="_blank" rel="noreferrer">Cookies Policy</a> |
 
       	<a class="canvas-web-footer-link" href="https://docs.google.com/document/d/1xamUq7dfrJHR39pdH0GEWPP1msd4TuIdAG2PTF_YGGg/edit?usp=sharing" target="_blank" rel="noreferrer">EULA</a> |
         
@@ -104,9 +104,7 @@
           loading.classList.add("is-hidden");
           loading.addEventListener("transitionend", () => loading.remove(), { once: true });
           fullscreenButton.hidden = false;
-		  function (unityInstance) {
-    HApps.unity.attach({ gameInstance: unityInstance, objectName: 'HAppsJSBridge', methodName: 'OnMessage' });
-  };
+		  HApps.unity.attach({ gameInstance: unityInstance, objectName: 'HAppsJSBridge', methodName: 'OnMessage' });
         })
         .catch(showLoadingError);
     };
