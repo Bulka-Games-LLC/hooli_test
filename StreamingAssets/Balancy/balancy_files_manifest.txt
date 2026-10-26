@@ -1,1 +1,0 @@
-./balancy-webview-bridge.js
