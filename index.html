@@ -85,17 +85,17 @@
     matchWebGLToCanvasSize: true
 };
 
-const portal = true; // window.self !== window.top;
-  HApps.init({
-    platformOrigin: 'https://portal.igra.rocks',     // https://hooli.games in production
-    ssoLoginUrl: 'https://webhooks-hoolipay-lb-1.prd.balancy.dev/v2/hoolipay/portal/0ec15e10-88c4-11f0-bf25-1fec53a055ba/1/sign',
-    isPortal: portal
-  });
+  async function startGame() {
+    const portal = true; // window.self !== window.top;
+    await HApps.init({
+      platformOrigin: 'https://portal.igra.rocks',     // https://hooli.games in production
+      ssoLoginUrl: 'https://webhooks-hoolipay-lb-1.prd.balancy.dev/v2/hoolipay/portal/0ec15e10-88c4-11f0-bf25-1fec53a055ba/1/sign',
+      isPortal: portal
+    });
 
     const script = document.createElement("script");
     script.src = loaderUrl;
     script.onload = () => {
-	
       createUnityInstance(canvas, config, (progress) => {
         const percent = Math.round(Math.max(0, Math.min(1, progress)) * 100);
         loadingFill.style.width = percent + "%";
@@ -122,6 +122,9 @@ const portal = true; // window.self !== window.top;
       const footer = document.querySelector(".canvas-web-footer-container");
       footer.style.display = document.fullscreenElement || document.documentElement.classList.contains("is-embedded") ? "none" : "block";
     });
+  }
+
+  startGame().catch(showLoadingError);
 </script>
 </body>
 </html>
