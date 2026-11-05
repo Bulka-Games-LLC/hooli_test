@@ -17,15 +17,20 @@ body {
 }
 
 .unity-wrapper {
+    --canvas-inset: clamp(18px, 3vw, 32px);
+    --fullscreen-size: clamp(14px, 2vw, 24px);
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
 }
 
 #unity-canvas {
+    position: absolute;
+    top: var(--canvas-inset);
+    left: var(--canvas-inset);
     display: block;
-    width: 100%;
-    height: 100%;
+    width: calc(100% - var(--canvas-inset) - var(--canvas-inset));
+    height: calc(100% - var(--canvas-inset) - var(--canvas-inset));
     cursor: default;
 }
 
@@ -80,10 +85,10 @@ body {
 
 #unity-fullscreen-button {
     position: absolute;
-    right: 10px;
-    bottom: 10px;
-    width: 32px;
-    height: 32px;
+    right: var(--canvas-inset);
+    bottom: calc((var(--canvas-inset) - var(--fullscreen-size)) / 2);
+    width: var(--fullscreen-size);
+    height: var(--fullscreen-size);
     padding: 0;
     border: 0;
     background: url("fullscreen-icon.png") center / contain no-repeat;
