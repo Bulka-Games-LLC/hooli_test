@@ -14,13 +14,15 @@ body {
 
 #unity-container {
     width: 100%;
-    padding-bottom: 12px;
 }
 
 .unity-wrapper {
     /* Proportional insets keep both the wrapper and the inner canvas at 16:9. */
     --canvas-inset-x: clamp(18px, 3vw, 32px);
     --canvas-inset-y: clamp(10.125px, 1.6875vw, 18px);
+    /* Leave enough room below the canvas for fullscreen inside a clipped iframe. */
+    --canvas-inset-top: calc(var(--canvas-inset-y) - 10px);
+    --canvas-inset-bottom: calc(var(--canvas-inset-y) + 10px);
     --fullscreen-size: clamp(14px, 2vw, 24px);
     position: relative;
     width: 100%;
@@ -30,7 +32,7 @@ body {
 
 #unity-canvas {
     position: absolute;
-    top: var(--canvas-inset-y);
+    top: var(--canvas-inset-top);
     left: var(--canvas-inset-x);
     display: block;
     width: calc(100% - var(--canvas-inset-x) - var(--canvas-inset-x));
@@ -40,7 +42,7 @@ body {
 
 #unity-loading {
     position: absolute;
-    inset: var(--canvas-inset-y) var(--canvas-inset-x);
+    inset: var(--canvas-inset-top) var(--canvas-inset-x) var(--canvas-inset-bottom);
     z-index: 2;
     overflow: hidden;
     background: linear-gradient(0deg, rgba(0, 0, 0, .45), transparent 14%),
@@ -90,7 +92,7 @@ body {
 #unity-fullscreen-button {
     position: absolute;
     right: var(--canvas-inset-x);
-    bottom: calc(var(--canvas-inset-y) - var(--fullscreen-size) - 4px);
+    bottom: 0;
     width: var(--fullscreen-size);
     height: var(--fullscreen-size);
     padding: 0;
