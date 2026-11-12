@@ -17,13 +17,13 @@ body {
 }
 
 .unity-wrapper {
-    /* Proportional insets keep both the wrapper and the inner canvas at 16:9. */
-    --canvas-inset-x: clamp(18px, 3vw, 32px);
+    /* Extra side inset preserves 16:9 as the bottom edge moves up for the larger button. */
+    --canvas-inset-x: calc(clamp(18px, 3vw, 32px) + clamp(6.222222px, 0.888889vw, 10.666667px));
     --canvas-inset-y: clamp(10.125px, 1.6875vw, 18px);
     /* Leave enough room below the canvas for fullscreen inside a clipped iframe. */
     --canvas-inset-top: calc(var(--canvas-inset-y) - 10px);
-    --canvas-inset-bottom: calc(var(--canvas-inset-y) + 10px);
-    --fullscreen-size: clamp(14px, 2vw, 24px);
+    --canvas-inset-bottom: calc(var(--canvas-inset-y) + 10px + clamp(7px, 1vw, 12px));
+    --fullscreen-size: clamp(21px, 3vw, 36px);
     position: relative;
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -36,7 +36,7 @@ body {
     left: var(--canvas-inset-x);
     display: block;
     width: calc(100% - var(--canvas-inset-x) - var(--canvas-inset-x));
-    height: calc(100% - var(--canvas-inset-y) - var(--canvas-inset-y));
+    height: calc(100% - var(--canvas-inset-top) - var(--canvas-inset-bottom));
     cursor: default;
 }
 
