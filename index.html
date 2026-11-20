@@ -88,8 +88,9 @@
   async function startGame() {
     const portal = true; // window.self !== window.top;
     console.log("[Hooligaps2] HApps.init starting");
+    window.xOffersPortalOrigin = 'https://portal.igra.rocks';
     await HApps.init({
-      platformOrigin: 'https://portal.igra.rocks',     // https://hooli.games in production
+      platformOrigin: window.xOffersPortalOrigin,     // https://hooli.games in production
       ssoLoginUrl: 'https://webhooks-hoolipay-lb-1.prd.balancy.dev/v2/hoolipay/portal/0ec15e10-88c4-11f0-bf25-1fec53a055ba/1/sign',
       isPortal: portal
     });
