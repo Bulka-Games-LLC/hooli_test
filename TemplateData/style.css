@@ -13,9 +13,11 @@ body {
 }
 
 #unity-container {
-    /* Keep the 16:9 frame 8px from the top and 4px from the bottom. */
-    --frame-inset-x: 10.666667px;
+    --frame-min-inset-x: 10.666667px;
+    --frame-inset-x: var(--frame-min-inset-x);
     --frame-top: 8px;
+    --fullscreen-gap: 2px;
+    --frame-bottom-gap: 4px;
     --fullscreen-size: clamp(21px, 3vw, 36px);
     position: relative;
     width: 100%;
@@ -92,7 +94,7 @@ body {
 #unity-fullscreen-button {
     position: absolute;
     right: var(--frame-inset-x);
-    top: calc(100% + 2px);
+    top: calc(100% + var(--fullscreen-gap));
     width: var(--fullscreen-size);
     height: var(--fullscreen-size);
     padding: 0;

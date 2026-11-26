@@ -64,6 +64,26 @@
   const loadingProgressbar = document.querySelector("#loading-progressbar");
   const loadingFill = document.querySelector("#loading-fill");
   const fullscreenButton = document.querySelector("#unity-fullscreen-button");
+  const unityContainer = document.querySelector("#unity-container");
+  const unityWrapper = document.querySelector(".unity-wrapper");
+
+  function fitFrameAndFullscreenButton() {
+    const width = unityContainer.clientWidth;
+    const style = getComputedStyle(unityContainer);
+    const frameTop = parseFloat(style.getPropertyValue("--frame-top"));
+    const minInset = parseFloat(style.getPropertyValue("--frame-min-inset-x"));
+    const buttonGap = parseFloat(style.getPropertyValue("--fullscreen-gap"));
+    const bottomGap = parseFloat(style.getPropertyValue("--frame-bottom-gap"));
+    const buttonHeight = parseFloat(getComputedStyle(fullscreenButton).height);
+    const [aspectWidth, aspectHeight] = getComputedStyle(unityWrapper).aspectRatio.split("/").map(Number);
+    const availableHeight = window.innerHeight - unityContainer.getBoundingClientRect().top;
+    const maxFrameHeight = Math.max(0, availableHeight - frameTop - buttonGap - buttonHeight - bottomGap);
+    const inset = Math.min(width / 2, Math.max(minInset, (width - maxFrameHeight * aspectWidth / aspectHeight) / 2));
+    const frameHeight = Math.max(0, width - 2 * inset) * aspectHeight / aspectWidth;
+
+    unityContainer.style.setProperty("--frame-inset-x", inset + "px");
+    fullscreenButton.style.top = (frameTop + frameHeight + buttonGap) + "px";
+  }
 
   function showLoadingError(message) {
     loadingStatus.textContent = "Loading failed. Please refresh the page.";
@@ -127,6 +147,8 @@
     });
   }
 
+  fitFrameAndFullscreenButton();
+  window.addEventListener("resize", fitFrameAndFullscreenButton);
   startGame().catch(showLoadingError);
 </script>
 </body>
