@@ -13,36 +13,35 @@ body {
 }
 
 #unity-container {
-    width: 100%;
-}
-
-.unity-wrapper {
-    /* Extra side inset preserves 16:9 as the bottom edge moves up for the larger button. */
-    --canvas-inset-x: calc(clamp(18px, 3vw, 32px) + clamp(6.222222px, 0.888889vw, 10.666667px));
-    --canvas-inset-y: clamp(10.125px, 1.6875vw, 18px);
-    /* Leave enough room below the canvas for fullscreen inside a clipped iframe. */
-    --canvas-inset-top: calc(var(--canvas-inset-y) - 10px);
-    --canvas-inset-bottom: calc(var(--canvas-inset-y) + 10px + clamp(7px, 1vw, 12px));
+    --frame-inset-x: clamp(28px, 4vw, 50px);
+    --frame-top: calc(clamp(10.125px, 1.6875vw, 18px) - 10px);
     --fullscreen-size: clamp(21px, 3vw, 36px);
     position: relative;
     width: 100%;
+    aspect-ratio: 16 / 9;
+}
+
+.unity-wrapper {
+    position: absolute;
+    top: var(--frame-top);
+    left: var(--frame-inset-x);
+    width: calc(100% - var(--frame-inset-x) - var(--frame-inset-x));
     aspect-ratio: 16 / 9;
     background: transparent;
 }
 
 #unity-canvas {
     position: absolute;
-    top: var(--canvas-inset-top);
-    left: var(--canvas-inset-x);
+    inset: 0;
     display: block;
-    width: calc(100% - var(--canvas-inset-x) - var(--canvas-inset-x));
-    height: calc(100% - var(--canvas-inset-top) - var(--canvas-inset-bottom));
+    width: 100%;
+    height: 100%;
     cursor: default;
 }
 
 #unity-loading {
     position: absolute;
-    inset: var(--canvas-inset-top) var(--canvas-inset-x) var(--canvas-inset-bottom);
+    inset: 0;
     z-index: 2;
     overflow: hidden;
     background: linear-gradient(0deg, rgba(0, 0, 0, .45), transparent 14%),
@@ -91,7 +90,7 @@ body {
 
 #unity-fullscreen-button {
     position: absolute;
-    right: var(--canvas-inset-x);
+    right: var(--frame-inset-x);
     bottom: 0;
     width: var(--fullscreen-size);
     height: var(--fullscreen-size);
