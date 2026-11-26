@@ -13,8 +13,9 @@ body {
 }
 
 #unity-container {
-    --frame-inset-x: clamp(28px, 4vw, 50px);
-    --frame-top: calc(clamp(10.125px, 1.6875vw, 18px) - 10px);
+    /* Match the inset ratios so the 16:9 game frame ends 4px above this block. */
+    --frame-inset-x: clamp(16px, 2.5vw, 30px);
+    --frame-top: calc(clamp(18px, 2.8125vw, 33.75px) - 4px);
     --fullscreen-size: clamp(21px, 3vw, 36px);
     position: relative;
     width: 100%;
@@ -91,7 +92,7 @@ body {
 #unity-fullscreen-button {
     position: absolute;
     right: var(--frame-inset-x);
-    bottom: 0;
+    top: calc(100% + 2px);
     width: var(--fullscreen-size);
     height: var(--fullscreen-size);
     padding: 0;
